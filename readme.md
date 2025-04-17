@@ -13,7 +13,9 @@ This script walks a file tree from a given root directory, filters out unwanted 
 - Outputs a single `.txt` file that can be provided to the language model for context wherever this script is run from
 
 > [!NOTE]
-> Your LM doesn't need to know about the photos you have of Benedict Cumberbatch _(or does it?)_ to understand that you have a problem with your codebase.  All it needs to know is that you have a few hundred of them in the public/pengwins directory. The _content_ of binary files will **always** be skipped when building up the context file, but the metadata **will** be included. (file size, last modified)
+> Your LM doesn't need to know about the photos you have of Benedict Cumberbatch _(or does it?)_ to understand that you have a problem with your codebase.  All it needs to know is that you have a few hundred of them in the public/pengwins directory.
+> 
+> For this reason the _content_ of binary files will **always** be skipped when building up the context file, but the metadata **will** be included. (file size, last modified)
 
 
 ## .lm_ignore
