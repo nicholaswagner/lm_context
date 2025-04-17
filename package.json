@@ -1,0 +1,24 @@
+{
+  "name": "lm_context",
+  "version": "0.0.1",
+  "description": "walks a file tree and builds up a single text file which can be provided to a language model for prompt context",
+  "license": "MIT",
+  "author": "nicholaswagner",
+  "type": "module",
+  "main": "lm_context.ts",
+  "scripts": {
+    "postinstall": "shx chmod +x ./lm_context.ts",
+    "build": "tsc"
+  },
+  "bin": {
+    "lm_context": "./lm_context.ts"
+  },
+  "dependencies": {
+    "@types/node": "^22.14.1",
+    "@types/yargs": "^17.0.33",
+    "ignore": "^7.0.3",
+    "shx": "^0.4.0",
+    "typescript": "^5.8.3",
+    "yargs": "^17.7.2"
+  }
+}
