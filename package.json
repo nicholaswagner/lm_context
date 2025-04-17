@@ -1,17 +1,25 @@
 {
   "name": "lm_context",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "walks a file tree and builds up a single text file which can be provided to a language model for prompt context",
+  "homepage": "https://github.com/nicholaswagner/lm_context#readme",
+  "bugs": {
+    "url": "https://github.com/nicholaswagner/lm_context/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicholaswagner/lm_context.git"
+  },
   "license": "MIT",
   "author": "nicholaswagner",
   "type": "module",
   "main": "lm_context.ts",
+  "bin": {
+    "lm_context": "lm_context.ts"
+  },
   "scripts": {
     "postinstall": "shx chmod +x ./lm_context.ts",
     "build": "tsc"
-  },
-  "bin": {
-    "lm_context": "./lm_context.ts"
   },
   "dependencies": {
     "@types/node": "^22.14.1",
@@ -20,5 +28,6 @@
     "shx": "^0.4.0",
     "typescript": "^5.8.3",
     "yargs": "^17.7.2"
-  }
+  },
+  "devDependencies": {}
 }
