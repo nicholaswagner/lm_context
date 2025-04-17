@@ -66,6 +66,9 @@ This will walk the directory tree of your project, filter out unwanted files, es
 ## Todo list
 - [ ] Add some tests with vitest ... because why not
 - [ ] Confirm this works on other OS's
+- [ ] Consider including the ability to target a specific file which would generate a `.filename.lm_context.ext`
+    - this would include the file metadata and code.
+    - you could then either use this as-is, or integrate this into another script which would hand it over to a local LM which would provide an intelligent summary.  These files then could later be used to provide further context to your LM model.
 - [ ] Possibly include a few examples for how you could use this script in other ways.
     - have it get triggered as a post git commit hook
     - show how to generate an LM_context for only the changed files in a git PR
