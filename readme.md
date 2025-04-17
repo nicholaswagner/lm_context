@@ -17,7 +17,7 @@ This script walks a file tree from a given root directory, filters out unwanted 
 
 You can simply run this now using `npx` by running the following in your terminal
 ```sh
-npx tsx lm_context.ts --root path/to/your/directory --output output.txt
+npx lm_context --root path/to/your/directory --output output.txt
 ```
 
 
@@ -30,6 +30,6 @@ npx tsx lm_context.ts --root path/to/your/directory --output output.txt
 
 Example:
 ```sh
-lm_context --root ~/projects/my-vibe-coded-terribleness --output context.txt --max-tokens 64000
+npx lm_context --root ~/projects/my-vibe-coded-terribleness --output context.txt --max-tokens 64000
 ```
 This will walk the directory tree of your project, filter out unwanted files, estimate token usage, and generate a context file that is ready for input into a language model.  
