@@ -12,3 +12,24 @@ This script walks a file tree from a given root directory, filters out unwanted 
 - Outputs a single `.txt` file that can be provided to the language model for context wherever this script is run from
 
 
+## Running the script
+*disclosure:  I have only tested this on `osx`.  Let me know if you find any 🐞
+
+You can simply run this now using `npx` by running the following in your terminal
+```sh
+npx tsx lm_context.ts --root path/to/your/directory --output output.txt
+```
+
+
+---
+
+## Script Options:
+--root (string): The root directory to start walking from. Defaults to the current working directory if not provided.
+--output (string): The path to save the generated output file. Defaults to output.lm.txt.
+--max-tokens (number): The max token limit to respect when generating the output (default is 64,000).
+
+Example:
+```sh
+lm_context --root ~/projects/my-vibe-coded-terribleness --output context.txt --max-tokens 64000
+```
+This will walk the directory tree of your project, filter out unwanted files, estimate token usage, and generate a context file that is ready for input into a language model.  
