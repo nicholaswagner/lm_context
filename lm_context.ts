@@ -20,6 +20,7 @@ import ignore from 'ignore';
 import readline from 'readline';
 import { promisify } from 'util';
 
+const lstat = promisify(fs.lstat);
 const stat = promisify(fs.stat);
 const readdir = promisify(fs.readdir);
 
@@ -81,7 +82,7 @@ async function walk(dir: string, filter: (filePath: string) => boolean): Promise
         if (entry.name.startsWith('.')) continue;
 
         const fullPath = path.join(dir, entry.name);
-        const stats = await stat(fullPath);
+        const stats = await lstat(fullPath);
         if (stats.isSymbolicLink()) continue;
 
         if (entry.isDirectory()) {
