@@ -9,7 +9,7 @@
  * The script is designed to be run from the command line and takes the following arguments:
  * --root: The root directory to scan (default is the current working directory)
  * --output: The output file path (default is 'output.lm.txt')
- * --max-tokens: The maximum number of tokens to include in the output file (default is 64000)
+ * --max-tokens: The maximum number of tokens to include in the output file (default is unlimited)
 */
 
 import fs from 'fs';
@@ -108,7 +108,7 @@ async function main() {
     const argv = await yargs(hideBin(process.argv))
         .option('root', { type: 'string', describe: 'Root directory to scan' })
         .option('output', { type: 'string', default: 'output.lm.txt', describe: 'Output file path' })
-        .option('max-tokens', { type: 'number', default: 64000, describe: 'Max token limit (approximate)' })
+        .option('max-tokens', { type: 'number', default: NaN, describe: 'Max token limit (approximate)' })
         .parse();
 
     const root = path.resolve(argv.root || process.cwd());
