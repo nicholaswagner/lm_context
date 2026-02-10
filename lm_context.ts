@@ -107,6 +107,7 @@ async function walk(dir: string, filter: (filePath: string) => boolean): Promise
 async function main() {
     const argv = await yargs(hideBin(process.argv))
         .option('root', { type: 'string', describe: 'Root directory to scan' })
+        .option('file', { type: 'string', describe: 'Single file to process (ignores .lm_ignore/.gitignore)' })
         .option('output', { type: 'string', default: 'output.lm.txt', describe: 'Output file path' })
         .option('max-tokens', { type: 'number', default: NaN, describe: 'Max token limit (approximate)' })
         .parse();
@@ -114,6 +115,51 @@ async function main() {
     const root = path.resolve(argv.root || process.cwd());
     const outputPath = path.resolve(argv.output);
     const maxTokens = argv['max-tokens'];
+    const singleFile = argv.file ? path.resolve(argv.file) : null;
+
+    if (singleFile) {
+        const stats = await lstat(singleFile);
+        if (stats.isSymbolicLink()) {
+            console.error(`Refusing to read symlink: ${singleFile}`);
+            process.exit(1);
+        }
+        if (!stats.isFile()) {
+            console.error(`Path is not a file: ${singleFile}`);
+            process.exit(1);
+        }
+
+        const buffer = fs.readFileSync(singleFile);
+        const binary = isBinary(buffer);
+        const content = binary ? '' : buffer.toString('utf8');
+        const file: FileEntry = {
+            filePath: singleFile,
+            modified: stats.mtime,
+            content,
+            size: buffer.length,
+            binary
+        };
+
+        let output = '';
+        let totalTokens = 0;
+
+        if (file.binary) {
+            output += `--- Binary File: ${path.relative(root, file.filePath)} (last modified: ${file.modified.toISOString()}, size: ${file.size} bytes) ---\n\n`;
+        } else {
+            const tokens = estimateTokens(file.content);
+            if (maxTokens && totalTokens + tokens > maxTokens) {
+                console.warn(`Skipping ${file.filePath} (token limit exceeded)`);
+            } else {
+                totalTokens += tokens;
+                output += `--- File: ${path.relative(root, file.filePath)} (last modified: ${file.modified.toISOString()}) ---\n`;
+                output += file.content + '\n\n';
+            }
+        }
+
+        console.log(`Estimated total tokens: ${totalTokens}`);
+        fs.writeFileSync(outputPath, output, 'utf8');
+        console.log(`Wrote output to ${outputPath}`);
+        return;
+    }
 
     const filter = await getIgnoreFilter(root);
     const files = await walk(root, filter);

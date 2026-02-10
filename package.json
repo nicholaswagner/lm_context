@@ -1,6 +1,9 @@
 {
   "name": "lm_context",
-  "version": "0.6.0",
+  "version": "0.7.0",
+  "engines": {
+    "node": "^22.14.0"
+  },
   "description": "walks a file tree and builds up a single text file which can be provided to a language model for prompt context",
   "homepage": "https://github.com/nicholaswagner/lm_context#readme",
   "bugs": {
