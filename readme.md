@@ -19,7 +19,8 @@ This script walks a file tree from a given root directory, filters out unwanted 
 
 It extracts file contents, annotates them with metadata, and estimates token usage to ensure that the language model’s token limit is respected.
 
-> [!NOTE] The _content_ of **binary** files will **always** be skipped when building up the context file, but the metadata **will** be included. (file size, last modified)
+> [!NOTE] 
+> The _content_ of **binary** files will **always** be skipped when building up the context file, but the metadata **will** be included. (file size, last modified)
 
 ### Arguments:
 
